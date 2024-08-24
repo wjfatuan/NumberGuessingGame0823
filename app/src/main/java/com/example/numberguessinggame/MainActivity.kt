@@ -10,8 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    val leftNumber: Int = 10
-    val rightNumber: Int = 50
+    var leftNumber: Int = (1..100).random()
+    var rightNumber: Int = (1..100).random()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,12 @@ class MainActivity : AppCompatActivity() {
         val btnLeft = findViewById<Button>(R.id.buttonLeft)
         btnLeft.text = "Boton izquierdo"
         btnLeft.setOnClickListener {
+            println("left number: $leftNumber")
+            println("right number: $rightNumber")
             if(leftNumber>=rightNumber) {
                 txtText.text = "Felicitaciones! Has ganado."
+                leftNumber = (1..100).random()
+                rightNumber = (1..100).random()
             }
             else {
                 txtText.text = "Lo siento, has perdido :("
@@ -38,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         btnRight.setOnClickListener {
             if(leftNumber<=rightNumber) {
                 txtText.text = "Felicitaciones! Has ganado."
+                leftNumber = (1..100).random()
+                rightNumber = (1..100).random()
             }
             else {
                 txtText.text = "Lo siento, has perdido :("
