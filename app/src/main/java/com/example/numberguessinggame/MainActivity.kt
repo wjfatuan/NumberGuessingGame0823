@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.numberguessinggame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,37 +17,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val txtText = findViewById<TextView>(R.id.myText)
-        val btnLeft = findViewById<Button>(R.id.buttonLeft)
-        btnLeft.text = "Boton izquierdo"
-        btnLeft.setOnClickListener {
+        binding.buttonLeft.text = "Boton izquierdo"
+        binding.buttonLeft.setOnClickListener {
             println("left number: $leftNumber")
             println("right number: $rightNumber")
             if(leftNumber>=rightNumber) {
-                txtText.text = "Felicitaciones! Has ganado."
+                binding.myText.text = "Felicitaciones! Has ganado."
                 leftNumber = (1..100).random()
                 rightNumber = (1..100).random()
             }
             else {
-                txtText.text = "Lo siento, has perdido :("
+                binding.myText.text = "Lo siento, has perdido :("
             }
 
         }
-        val btnRight = findViewById<Button>(R.id.buttonRight)
-        btnRight.setOnClickListener {
+        binding.buttonRight.setOnClickListener {
             if(leftNumber<=rightNumber) {
-                txtText.text = "Felicitaciones! Has ganado."
+                binding.myText.text = "Felicitaciones! Has ganado."
                 leftNumber = (1..100).random()
                 rightNumber = (1..100).random()
             }
             else {
-                txtText.text = "Lo siento, has perdido :("
+                binding.myText.text = "Lo siento, has perdido :("
             }
         }
 
